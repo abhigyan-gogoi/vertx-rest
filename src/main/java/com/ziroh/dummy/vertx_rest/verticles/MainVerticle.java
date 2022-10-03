@@ -5,10 +5,14 @@ import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
 public class MainVerticle extends AbstractVerticle {
+
+  private static final Logger log = LoggerFactory.getLogger(MainVerticle.class);
   public static void main(String[] args) {
     final Vertx vertx = Vertx.vertx();
     vertx.deployVerticle(new MainVerticle());
@@ -16,7 +20,7 @@ public class MainVerticle extends AbstractVerticle {
 
   @Override
   public void start(Promise<Void> startPromise) throws Exception {
-    System.out.println("STARTED: "+getClass().getName());
+    log.debug("STARTED: {}", getClass().getName());
     vertx.deployVerticle(new VerticleA());
     vertx.deployVerticle(new VerticleB());
     // Multiple instances required name not an object instance
