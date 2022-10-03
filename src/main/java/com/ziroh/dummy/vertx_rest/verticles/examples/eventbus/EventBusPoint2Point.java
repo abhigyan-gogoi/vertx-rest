@@ -30,7 +30,10 @@ public class EventBusPoint2Point extends AbstractVerticle {
     public void start(Promise<Void> startPromise) throws Exception {
       startPromise.complete();
       vertx.eventBus().<String>consumer(Sender.class.getName(),
-        message -> log.debug("RECEIVED MESSAGE: {}", message.body()));
+        message -> {
+          log.debug("RECEIVED MESSAGE: {}", message.body());
+//          System.out.println("rando");
+      });
     }
   }
 }
