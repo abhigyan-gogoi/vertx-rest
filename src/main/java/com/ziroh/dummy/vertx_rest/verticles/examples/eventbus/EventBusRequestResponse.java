@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EventBusRequestResponse extends AbstractVerticle {
-  private static final Logger log = LoggerFactory.getLogger(RequestVerticle.class.getName());
 
   public static void main(String[] args) {
     Vertx vertx = Vertx.vertx();
@@ -19,6 +18,7 @@ public class EventBusRequestResponse extends AbstractVerticle {
   // Better to keep these as separate files
   // Static classes for example visibility purposes
   static class RequestVerticle extends AbstractVerticle {
+    private static final Logger log = LoggerFactory.getLogger(RequestVerticle.class.getName());
     static final String ADDRESS = "event.bus.example";
 
     @Override
@@ -33,7 +33,7 @@ public class EventBusRequestResponse extends AbstractVerticle {
   }
 
   static class ResponseVerticle extends AbstractVerticle {
-
+    private static final Logger log = LoggerFactory.getLogger(ResponseVerticle.class.getName());
     @Override
     public void start(Promise<Void> startPromise) throws Exception {
       startPromise.complete();
