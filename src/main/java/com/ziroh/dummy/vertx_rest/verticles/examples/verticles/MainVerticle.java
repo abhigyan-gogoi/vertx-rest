@@ -1,4 +1,4 @@
-package com.ziroh.dummy.vertx_rest.verticles;
+package com.ziroh.dummy.vertx_rest.verticles.examples.verticles;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;

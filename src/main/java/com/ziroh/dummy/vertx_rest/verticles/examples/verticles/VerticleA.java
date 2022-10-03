@@ -1,4 +1,4 @@
-package com.ziroh.dummy.vertx_rest.verticles;
+package com.ziroh.dummy.vertx_rest.verticles.examples.verticles;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
@@ -9,10 +9,10 @@ public class VerticleA extends AbstractVerticle {
   private static final Logger log = LoggerFactory.getLogger(MainVerticle.class);
   @Override
   public void start(Promise<Void> startPromise) throws Exception {
-    log.debug("STARTED: {}"+getClass().getName());
+    log.debug("STARTED: {}", getClass().getName());
     vertx.deployVerticle(new VerticleAA(), whenDeployed -> {
       // This is an Async callback
-      log.debug("DEPLOYED: {}"+ VerticleAA.class.getName());
+      log.debug("DEPLOYED: {}", VerticleAA.class.getName());
       vertx.undeploy(whenDeployed.result());
     });
     startPromise.complete();
