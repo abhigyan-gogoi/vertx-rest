@@ -14,6 +14,7 @@ public class MainVerticle extends AbstractVerticle {
   public void start(Promise<Void> startPromise) throws Exception {
     System.out.println("STARTED: "+getClass().getName());
     vertx.deployVerticle(new VerticleA());
+    vertx.deployVerticle(new VerticleB());
     startPromise.complete();
   }
 }
