@@ -25,7 +25,6 @@ public class JsonRequestResponse extends AbstractVerticle {
 
     @Override
     public void start(Promise<Void> startPromise) throws Exception {
-      startPromise.complete();
       EventBus eventBus = vertx.eventBus();
       // Can send strings, vertx/custom objects through the event bus
       final JsonObject message = new JsonObject()
@@ -34,6 +33,16 @@ public class JsonRequestResponse extends AbstractVerticle {
       log.debug("SENDING REQUEST MESSAGE: {}", message);
       eventBus.<JsonArray>request(ADDRESS, message,
         reply -> log.debug("RESPONSE: {}", reply.result().body()));
+      startPromise.complete();
+//      vertx.undeploy("UNDEPLOYED : "+getClass().getName());
+//      vertx.deploymentIDs().forEach(s -> vertx.undeploy(s));
+//      vertx.close();
+    }
+
+    @Override
+    public void stop(Promise<Void> stopPromise) throws Exception {
+      log.debug("STOPPED: {}", getClass().getName());
+      stopPromise.complete();
     }
   }
 
@@ -43,7 +52,7 @@ public class JsonRequestResponse extends AbstractVerticle {
     public void start(Promise<Void> startPromise) throws Exception {
       startPromise.complete();
       vertx.eventBus().<JsonObject>consumer(RequestVerticle.ADDRESS, message -> {
-        log.debug("RECEIVED MESSAGE: {}", message.body());
+        log.debug("RECEIVED MESSAGE: \n{}", message.body().encodePrettily());
         message.reply(new JsonArray().add("one").add("two").add("three"));
       });
     }
